@@ -1,0 +1,84 @@
+<template>
+  <template if:true={candidate.data}>
+    <article class="slds-card">
+      <template if:false={hasOutCome}>
+        <div class="slds-card__body slds-card__body_inner">
+          <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-medium-size_1-of-2">
+              <button
+                class="slds-button slds-button_neutral slds-button_stretch"
+                onclick={hire}
+              >
+                Hired
+              </button>
+            </div>
+            <div class="slds-col slds-medium-size_1-of-2">
+              <button
+                class="slds-button slds-button_text-destructive slds-button_stretch"
+                onclick={reject}>
+                Rejected
+              </button>
+            </div>
+          </div>
+        </div>
+
+      <template if:true={isHired}>
+        <div class="slds-card__header slds-grid">
+          <header class="slds-media slds-media--center slds-has-flexi-truncate">
+            <div class="slds-media__figure">
+              <lightning-icon
+                icon-name="standard:task2"
+                alternative-text="Hired"
+                size="small"
+              ></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+              <h2 class="header-title-container">
+                <span
+                  class="slds-card__header-title slds-truncate"
+                  title="Hired"
+                >
+                  Hired
+                </span>
+              </h2>
+            </div>
+          </header>
+        </div>
+      </template>
+      <!-- Text area that get de reason to reject -->
+      <template if:true={showReasonText}>
+        <p class="slds-media--center"><lightning-formatted-text class="slds-text-heading_small fontPlace" value="Please, write the reason of reject this candidate."></lightning-formatted-text></p>
+        <lightning-textarea value={reasonText} onchange={reasonEvent} max-length="255" message-when-too-long="This message is to much long" 
+        message-when-value-missing="This field is required" required></lightning-textarea><br/>
+        <lightning-button variant="brand" label="Save" onclick={saveReason} class="slds-button_stretch">
+        </lightning-button>
+      </template>
+    </template>
+
+      <template if:true={hasReason}>
+        <div class="slds-card__header slds-grid">
+          <header class="slds-media slds-media--center slds-has-flexi-truncate">
+            <div class="slds-media__figure">
+              <lightning-icon
+                icon-name="standard:first_non_empty"
+                alternative-text="Rejected"
+                size="small"
+              ></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+              <h2 class="header-title-container">
+                <span
+                  class="slds-card__header-title slds-truncate"
+                  title="Rejected">
+                  Rejected
+                </span>
+              </h2>
+            </div>
+          </header>
+        </div>
+        <!-- Value of text area field -->
+        <p><lightning-formatted-text class="slds-text-heading_small" value={reason}></lightning-formatted-text></p>
+      </template>
+    </article>
+  </template>
+</template>
